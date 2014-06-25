@@ -1,0 +1,14 @@
+% German Credit Card Dataset (CLASSIFICATION)
+data = csvread('credit_german.data');
+X = data(:, 2:end);
+T1 = data(:, 1);
+T = ones(size(T1,1), max(T1)) * -1;
+T(T1 == 1, 1) = 1;
+
+dnne = newdnne(5, 50, X, T, 0.5);
+
+[dnne, rmse] = traindnne(dnne, X, T);
+
+netOut = simdnne(dnne, X);
+
+rmse1 = sqrt(sum((T - netOut).^2) / size(T,1));
