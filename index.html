@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="Description" content="Your Title">
+    <meta name="author" content="CoffeeCup Software, Inc.">
+    <meta name="Copyright" content="Copyright (c) 2010 CoffeeCup, all rights reserved.">
+	<title>DNNE Software Tool</title>
+	<style type="text/css" media="screen">
+		html, body, div, header, footer, aside, nav, article, section	{ margin: 0; padding: 0; }
+		header, footer, aside, nav, article, section	{ display: block; }
+		body 			{ color: #333; font: 14px Helvetica, Arial, sans-serif; line-height: 18px; }
+		h2				{ color: #333; }
+		a				{ color: #337810; }
+		p				{ margin: 0 0 18px; }
+		#container		{ width: 1024px; margin: 0 auto; }
+		
+		/* Header */
+		header			{ background: #333; border-bottom: 2px solid #aaa; }
+		header h1  	{ color: #fff; margin: 0 0 3px; padding: 24px 18px 0; }
+		header p		{ color: #ccc; font-size: 11px; font-weight: bold; padding: 0 18px; }
+		
+		/* Content Style */
+		nav		{ margin-left: 18px; }
+		nav ul	{ padding: 0 18px 9px; }
+		#extra			{ margin: 0 18px; }
+		#extra small	{ font-size: 13px; line-height: 18px; }
+		#content		{ border-bottom: 1px solid #ccc; margin: 0 18px; }
+		#content p, #extra p { padding-right: 18px; }
+		
+		/* Content Positioning and Size */
+		nav		{ float: right; width: 350px; }
+		#content		{  }
+		#extra			{ float: left; width: 350px; }		/* Footer */
+		footer			{ background: #666; border-bottom: 2px solid #aaa; clear: both; }
+		footer a		{ color: #fff; }
+		footer	p		{ color: #ccc; margin: 0; padding: 0 18px 10px; }
+		footer ul		{ border-bottom: 1px solid #999; list-style: none; margin: 0 18px 6px; padding: 10px 0 6px; }
+		footer li		{ display: inline; font-size: 11px; font-weight: bold; padding-right: 5px; }
+	</style>
+	<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870145 1073786111 1 0 415 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	mso-bidi-font-family:"Times New Roman";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	mso-style-unhide:no;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	mso-bidi-font-family:"Times New Roman";}
+p.msopapdefault, li.msopapdefault, div.msopapdefault
+	{mso-style-name:msopapdefault;
+	mso-style-unhide:no;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:10.0pt;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Calibri","sans-serif";
+	mso-ascii-font-family:Calibri;
+	mso-hansi-font-family:Calibri;}
+.MsoPapDefault
+	{mso-style-type:export-only;
+	margin-bottom:10.0pt;
+	line-height:115%;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+	<!--[if IE]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="container">
+		<header>
+			<h1>DNNE 
+			<br/><br/>
+			Fast decorrelated neural network ensembles with random weights</h1>
+			<p class="description">Monther Alhamdoosh and Dianhui Wang</p>
+		</header>
+		<div id="wrapper">
+			<section id="content">
+				<h2>Overview</h2>
+				<div align="justify">The assurance of well-balanced trade-off between the bias and variance of single RVFL learner is a difficult task due to the uncertainties in the learning process that are caused by the random initializations of basis functions. Different initial settings for the RVFL networks lead to different solutions. In order to reduce the impact of these factors on the generalization error of a learning system, a cluster of RVFL networks are combined together to produce efficient predictions [5] and [22]. In this paper, we propose a new ensemble learning approach that uses RVFL networks as ensemble components and it is fitted in negative correlation learning framework. Since RVFL networks do not require learning all their parameters (basis functions are set randomly), we seek a simple and fast solution to calculate the output weights of the base RVFL networks. This solution should take into account the correlation among the base RVFL networks in the output space and make sure it is at minimum. Although DNNE aims at encouraging the diversity among ensemble components by reducing the correlation among their outputs, it still maintains an overall good ensemble accuracy. Next, we present our method in details.</div>
+				The following pseudocode illustrates the DNNE learning algorithm
+				<img src="images/algorithm.png" width="1024" alt="" border="0">
+				
+			</section>
+			<section id="content">
+			<h2>Installation and Usage</h2>
+			Download the DNNE MATLAB package from <a href="#download">here</a> 
+			</section>
+			
+			<section id="content">
+			<h2>Practical Examples</h2>
+			<h3>Computer Activity Dataset (Regression)</h3>
+<div align="justify"> Computer Activity dataset describes the portion of time that CPUs run in user-mode, based on 8192 computer system activities collected from a Sun SPARCstation 20/712 with 2 CPUs and 128 MB of memory running in a multi-user university department, and each system activity is evaluated using 12 system measures (number of reads and number of writes between system memory and user memory, number of system calls of all types, number of system read calls, number of system write calls, number of system fork calls, number of system exec calls, number of characters transferred by read calls, number of characters transferred by write calls, process run queue size, number of memory pages available to user processes, and number of disk blocks available for page swapping).</div>
+. Number of Instances: chosen by the user.
+
+6. Number of Attributes: 7 (all Boolean-valued)
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>all</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>data</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = csvread(</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'data/computer_activity.data'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>X = <span class=GramE>data(</span>:,
+2:end);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>T = <span class=GramE>data(</span>:, 1);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>s = <span class=GramE>RandStream(</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'mt19937ar'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'Seed'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,54829);&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>RandStream.setGlobalStream(s);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>dnne</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = newdnne(5,
+70, X, T, 0.5);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>[<span class=GramE>dnne</span>, rmse] = <span
+class=GramE>traindnne(</span>dnne, X, T);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>netOut</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = simdnne(dnne,
+X);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>rmse1 = <span class=GramE>sqrt(</span>sum((T
+- netOut).^2) / size(T,1));</span></p>
+			<h3>Calfornia Housing Dataset (Regression)</h3>
+			<div align="justify">California Housing dataset contains 20,640 observations for estimating the median house prices in California, U.S. Each characterized by eight continuous features (median income, housing median age, total rooms, total bedrooms, population, households, latitude, and longitude).</div>
+			. Number of Instances: chosen by the user.
+
+6. Number of Attributes: 7 (all Boolean-valued)
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>all</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>data</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = csvread(</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'data/calhousing.data'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>X = <span class=GramE>data(</span>:,
+2:end);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>T = <span class=GramE>data(</span>:, 1);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>s = <span class=GramE>RandStream(</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'mt19937ar'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'Seed'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,54829);&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>RandStream.setGlobalStream(s);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>dnne</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = newdnne(5,
+50, X, T, 0.55);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>[<span class=GramE>dnne</span>, rmse] = <span
+class=GramE>traindnne(</span>dnne, X, T);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>netOut</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = simdnne(dnne,
+X);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>rmse1 = <span class=GramE>sqrt(</span>sum((T
+- netOut).^2) / size(T,1));</span></p>
+
+			<h3>German Credit Dataset (Binary Classification)</h3>
+			. Number of Instances: chosen by the user.
+
+6. Number of Attributes: 7 (all Boolean-valued)
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>all</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>data</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = csvread(</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'data/credit_german.data'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>X = <span class=GramE>data(</span>:,
+2:end);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>TOrig = <span class=GramE>data(</span>:,
+1);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>noClasses</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = max(TOrig);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>T = <span class=GramE>ones(</span>size(TOrig,1),
+noClasses) * -1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>for</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> i=1:noClasses</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>T(</span>TOrig
+== i, i) = 1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>end</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>noClasses</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>data</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>i</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>s = <span class=GramE>RandStream(</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'mt19937ar'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'Seed'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,54829);&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>RandStream.setGlobalStream(s);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>dnne</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = newdnne(5,
+100, X, T, 0.55);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>[<span class=GramE>dnne</span>, rmse] = <span
+class=GramE>traindnne(</span>dnne, X, T);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>predLabels</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = simdnne(dnne,
+X, </span><span style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'class'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>acc</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = sum(TOrig ==
+predLabels) / size(TOrig,1) * 100;</span></p>
+			<h3>Led-7 Dataset (Multi-class Classification)</h3>
+			This simple domain contains 7 Boolean attributes and 10 concepts,
+     the set of decimal digits.  Recall that LED displays contain 7
+     light-emitting diodes -- hence the reason for 7 attributes.  The
+     problem would be easy if not for the introduction of noise.  In
+     this case, each attribute value has the 10% probability of having
+     its value inverted. -- All attribute values are either 0 or 1, according to whether
+      the corresponding light is on or not for the decimal digit.
+   -- Each attribute (excluding the class attribute, which is an
+      integer ranging between 0 and 9 inclusive) has a 10% percent
+      chance of being inverted.
+	  5. Number of Instances: chosen by the user.
+
+6. Number of Attributes: 7 (all Boolean-valued)
+. Class Distribution: 10% (Theoretical)
+   -- Each concept (digit) has the same theoretical probability
+      distribution.  The program randomly selects the attribute.
+	  
+	  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>all</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>data</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = csvread(</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'data/led_7.data'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>X = <span class=GramE>data(</span>:,
+2:end);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>TOrig = <span class=GramE>data(</span>:,
+1);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>if</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> min(TOrig) == 1</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>noClasses</span>
+= max(TOrig);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; T = <span
+class=GramE>ones(</span>size(TOrig,1), noClasses) * -1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><span
+class=GramE><span style='font-size:10.0pt;font-family:"Courier New";color:blue'>for</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> i=1:noClasses</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span class=GramE>T(</span>TOrig == i, i) = 1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><span
+class=GramE><span style='font-size:10.0pt;font-family:"Courier New";color:blue'>end</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>elseif</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> min(TOrig) == 0</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>noClasses</span>
+= max(TOrig) + 1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; T = <span
+class=GramE>ones(</span>size(TOrig,1), noClasses) * -1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><span
+class=GramE><span style='font-size:10.0pt;font-family:"Courier New";color:blue'>for</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> i=1:noClasses</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span class=GramE>T(</span>TOrig == i - 1, i) = 1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><span
+class=GramE><span style='font-size:10.0pt;font-family:"Courier New";color:blue'>end</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>end</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:blue'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>noClasses</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>data</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>i</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>s = <span class=GramE>RandStream(</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'mt19937ar'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'Seed'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,54829);&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>RandStream.setGlobalStream(s);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>dnne</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = newdnne(5,
+50, X, T, 0.55);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>[<span class=GramE>dnne</span>, rmse] = <span
+class=GramE>traindnne(</span>dnne, X, T);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>predLabels</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = simdnne(dnne,
+X, </span><span style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'class'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>if</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> min(TOrig) == 1</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>predLabels</span>
+= simdnne(dnne, X, </span><span style='font-size:10.0pt;font-family:"Courier New";
+color:#A020F0'>'class'</span><span style='font-size:10.0pt;font-family:"Courier New";
+color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>elseif</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> min(TOrig) == 0</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>predLabels</span>
+= simdnne(dnne, X, </span><span style='font-size:10.0pt;font-family:"Courier New";
+color:#A020F0'>'class'</span><span style='font-size:10.0pt;font-family:"Courier New";
+color:black'>) - 1;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>end</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:blue'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>acc</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> = sum(TOrig ==
+predLabels) / size(TOrig,1) * 100;</span></p>
+			</section>
+			
+			<section id="content">
+				<h2>Evaluation Example</h2>
+				<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>all</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>s = <span class=GramE>RandStream(</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'mt19937ar'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>'Seed'</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>,1986);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>for</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> i=1:10</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:forestgreen'>%
+California Housing Dataset (REGRESSION)</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>data</span>
+= csvread(</span><span style='font-size:10.0pt;font-family:"Courier New";
+color:#A020F0'>'data/calhousing.data'</span><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>indexes</span>
+= randperm(s, size(data,1));</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; t = <span
+class=GramE>ceil(</span>0.60 * size(data,1));</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>trainData</span>
+= data(indexes(1:t), :);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>testData</span>
+=&nbsp; data(indexes(t+1:end), :);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; [housing_<span
+class=GramE>dnneModel{</span>i}, housing_trnAcc(i), housing_tstAcc(i),
+housing_rmse(i)] = <span class=GramE>dnne(</span>5, 50, 0.55, trainData,
+testData, </span><span style='font-size:10.0pt;font-family:"Courier New";
+color:#A020F0'>'reg'</span><span style='font-size:10.0pt;font-family:"Courier New";
+color:black'>, s);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:forestgreen'>% German
+Credit Card Dataset (CLASSIFICATION)</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>data</span>
+= csvread(</span><span style='font-size:10.0pt;font-family:"Courier New";
+color:#A020F0'>'data/credit_german.data'</span><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>indexes</span>
+= randperm(s, size(data,1));</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; t = <span
+class=GramE>ceil(</span>0.60 * size(data,1));</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>trainData</span>
+= data(indexes(1:t), :);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; <span class=GramE>testData</span>
+=&nbsp; data(indexes(t+1:end), :);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; [credit_<span
+class=GramE>dnneModel{</span>i}, credit_trnAcc(i), credit_tstAcc(i),
+credit_rmse(i)] = <span class=GramE>dnne(</span>5, 100, 0.55, trainData,
+testData, </span><span style='font-size:10.0pt;font-family:"Courier New";
+color:#A020F0'>'class'</span><span style='font-size:10.0pt;font-family:"Courier New";
+color:black'>, s);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>end</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;background:#FFFF99;text-autospace:none'><span class=GramE><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'>clear</span></span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>data</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>trainData</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>testData</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>s</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>indexes</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>t</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:"Courier New";color:#A020F0'>i</span></p>
+				
+				</section>
+		</div>
+		<nav>
+			<h2><a id="download"><font color="#000000">Download Links</font></a></h2>
+			<ul>
+				<li><a href="dnne_matlab.zip">DNNE MATLAB code</a></li>
+				<li><a href="howtouse_dnne.zip">MATLAB code examples</a></li>
+				
+			</ul>
+		</nav>
+		<section id="extra">
+			<h2>Development Notice</h2>
+			<div align="justify">This software package has been developed by Monther Alhamdoosh (c) 2014 based on this paper 
+			<br />
+			Monther Alhamdoosh, Dianhui Wang, Fast decorrelated neural network ensembles with random weights, Information Sciences, Volume 264, 20 April 2014, Pages 104-117, ISSN 0020-0255, http://dx.doi.org/10.1016/j.ins.2013.12.016.
+<br />
+For technical support and/or help, please contact m.hamdoosh [at] gmail [dot] com
+<br />
+This package has been downloaed from http://homepage.cs.latrobe.edu.au/dwang/</div>
+
+		</section>
+		<footer>
+			
+			<p>Copyrights reserved for the authors (c) 2014 </p>
+		</footer>
+	</div>
+</body>
+</html>
