@@ -1,6 +1,6 @@
 function [dnne, rmse] = traindnne(dnneInit, X, T)
 %     This function runs the DNNE learning algorithm to optimize the ensemble model parameters
-%     [dnne, rmse] = traindnne(dnneInitial, X, T) RETURNS a trained DNNE model and 
+%     [dnne, rmse] = traindnne(dnneInit, X, T) RETURNS a trained DNNE model and 
 %     the root mean square error as an estimate to the learning error. It takes an empty DNNE model dnneInit,
 %     input feature vectors X that is N x n matrix and target vectors T that is N x t matrix
 %
